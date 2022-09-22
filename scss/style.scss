@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka One', cursive;
+}
+h1{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    color: white;
+    letter-spacing: 2px;
+    span{
+        border-radius: 10px;
+        background-color:#EF921C;
+        color: black;
+    }
+}
+$prime: #00FF80;
+$second: #0c1016;
+$color: #EF921C;
+
+.userBlok {
+    display: none;
+    left: calc(50% - 100px);
+    position: absolute;
+    top: calc(50% - 50px);
+    user-select: none;
+}
+
+.name {
+    border: 1px solid $color;
+    border-radius: 8px;
+    color: $color;
+    cursor: pointer;
+    clear: both;
+    display: block;
+    font-size: 150%;
+    margin: 0 auto 40px;
+    padding: 10px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    top: 20px;
+    transition: all 500ms linear;
+  
+    &::after {
+      background-color: rgba(255,255,255,0.4);
+      content: "";
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transition: none;
+      width: 0;
+    }
+  
+    &:hover {
+      background-color: rgba($color, 0.8);
+      box-shadow: 0 0 10px 0 $color;
+      color: #000;
+      text-decoration: none;
+      &::after {
+        background-color: rgba(255, 255, 255, 0);
+        transition: all 300ms ease-out;
+        width: 100%;
+      }
+    }
+}
+.btn__wrapper{
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    svg{
+        position: absolute;
+        top: -4000px;
+        left: -4000px;
+    }        
+    #gooey-button{
+        padding: 1rem;
+        font-size: 2rem;
+        border: none;
+        color: $second;
+        filter: url('#gooey');
+        position: relative;
+        background-color: $prime;
+        &:hover{
+            cursor: pointer;
+        }
+        &:focus{
+            outline: none
+        }
+        .bubbles{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            .bubble{
+                background-color: $prime;
+                border-radius: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                z-index: -1;
+                @for $bubble from 1 through 10{
+                    &:nth-child(#{$bubble}){
+                        $size: 25px;
+                        left: (random(90) + 10)+px;
+                        width: $size;
+                        height: $size;
+                        animation: move-#{$bubble} #{3 + $bubble*0.02}s infinite;
+                        animation-delay: #{$bubble*0.2}s;
+                    }
+                }
+            }
+                
+        }
+                    
+    }
+    @for $bubble from 1 through 10{
+        @keyframes move-#{$bubble}{
+            0%{
+                transform: translate(0, 0);
+            }
+            99%{
+                transform: translate(0, -(random(80) + 50)+px);
+            }
+            100%{
+                transform: translate(0, 0);
+                opacity: 0;
+            }           
+            
+        }
+    }
+}
